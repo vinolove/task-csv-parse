@@ -22,6 +22,11 @@ class Dashboard extends Component {
         if( parsedData.length === 0  ){
             return <Redirect to="/upload-file" />
         }
+        let fields = []
+        for( let data in parsedData[0]){
+            fields.push(data)
+        }
+
         return (
             <div style={{height: '100vh'}}>
                 <Header />
@@ -30,14 +35,14 @@ class Dashboard extends Component {
                     <HeadingText>Dashboard</HeadingText>
                     <Spacer />
                     <Table 
-                        rowNames={["id", "name", "mark1", "mark2", "mark3", "mark4"]} 
+                        rowNames={fields} 
                         parsedData={parsedData} 
                         setNewState={this.handleSetState}
                     />
                     <Spacer />
                     <HeadingText>Chart</HeadingText>
                     <Spacer />
-                    <Chart data={parsedData} fields={["id", "name", "mark1", "mark2", "mark3", "mark4"]} />
+                    <Chart data={parsedData} fields={fields} />
                 </DashboardLayout>
             </div>
         )
